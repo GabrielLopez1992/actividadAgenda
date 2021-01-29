@@ -1,0 +1,79 @@
+<div class="container mt-8">
+    <div class="row">
+    <div class="col-sm-4">
+        <div class="text-center">
+            <img src="assets/img/rhempresa.jpg"  height="150" width="150">
+            <h2>Agenda Electrónica</h2>
+        </div><br>
+        <div>
+            <form [formGroup]="formulario">  
+
+                
+                <div class="form-group" >
+                    <label >Codigo</label>
+                    <input type="text" class="form-control" id="codigo" aria-describedby="displayNameHelp"  placeholder="Codigo" formControlName ="codigo">
+                    
+                </div>
+                <div class="form-group">
+                  <label >Nombre y Apellido</label>
+                  <input type="text" class="form-control" id="nombre" aria-describedby="displayNameHelp"  placeholder="Nombre y Apellido" formControlName ="nombre">
+                  <div *ngIf="formulario.controls['nombre'].invalid && formulario.controls['nombre'].dirty" class="alert alert-danger" role="alert">
+                    <span >El Nombre es Requerido</span>
+            
+                  </div>  
+                </div>
+        
+                <div class="form-group">
+                  <label>Teléfono</label>
+                  <input type="text" class="form-control" id="telefono" aria-describedby="emailHelp"  placeholder="Ingrese su teléfono" formControlName ="telefono">
+                  <div *ngIf="formulario.controls['telefono'].invalid && formulario.controls['telefono'].dirty" class="alert alert-danger" role="alert">
+                    <span >Teléfono es requerido</span>
+            
+                  </div>  
+                </div>
+        
+                <div class="form-group">
+                  <label >Dirección</label>
+                  <input type="text" class="form-control" id="direccion" placeholder="Ingrese su direccion" formControlName ="direccion" (keyup.enter)="registro()">
+                  <div *ngIf="formulario.controls['direccion'].invalid && formulario.controls['direccion'].dirty" class="alert alert-danger" role="alert">
+                    <span >Dirección es requerido</span>
+                  </div> 
+                </div>
+        
+        
+                <button type="submit" (click)="registro()" [disabled]="!formulario.valid" class="btn btn-primary">Guardar</button>
+            </form>
+            <div *ngIf="!datosCorrectos" class="alert alert-warning" role="alert">
+                        {{ textError}}
+            </div>  
+
+
+        </div>
+       
+
+    </div>
+    <div class="col-sm-8">
+        <div class="mt-5">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Accion</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of listaAgendas">
+                    <th >{{item.age_nombre}} </th>
+                    <td>{{item.age_telefono}}</td>
+                    <td>{{item.age_direccion}}</td>
+                    <button type="button" class="btn btn-danger" (click)="eliminar(item)">Eliminar</button>
+                    <button type="button" class="btn btn-secondary" (click)="editar(item)">Editar</button>
+                </tr>
+                </tbody>
+            </table>
+        </div>  
+    </div>
+    </div>
+</div>
